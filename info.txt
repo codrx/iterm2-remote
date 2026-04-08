@@ -1,0 +1,9 @@
+
+To generate grpc files -> there is a make file
+
+     python -m grpc_tools.protoc -Iproto=proto --python_out=. --grpc_python_out=. proto/iterm2_remote.proto
+
+To run server/client:
+
+    python -m server.server
+    python -m server.client

@@ -1,0 +1,13 @@
+[project]
+name			= "iterm2-remote"
+authors			= "codrx"
+version 		= "0.0.1"
+description   	= "Do stuff through cmd using iterm2 api."
+requires-python = ">=3.10.12"
+readme 			= "README.md"
+keywords 		= ["iterm2", "terminal", "remote", "spawn", "create", "send", "command"]
+
+[project.optional-dependencies]
+
+[project.urls]
+homepage = ""
