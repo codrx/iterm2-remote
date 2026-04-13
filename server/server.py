@@ -28,7 +28,10 @@ from proto import iterm2_remote_pb2_grpc
 class Iterm2RemoteServer(iterm2_remote_pb2_grpc.Iterm2RemoteServicer):
 
     def __init__(self):
+
+        self.__event_loop = asyncio.new_event_loop() 
         self.__running_terminals = get_all_terminals()
+
 
         # self.__exec_queue = Queue()
         # self.__queue_not_empty = 0
@@ -86,9 +89,8 @@ class Iterm2RemoteServer(iterm2_remote_pb2_grpc.Iterm2RemoteServicer):
             focus = True
 
         try:
-            # Is there no other option? Change event loop policy instead? I have basic asyncio knowledge...
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop=loop)
+
+            asyncio.set_event_loop(loop=self.__event_loop)
 
             terminal = spawn_terminal(name=terminal_name, focus=focus, shell=shell, command=command)
 
@@ -160,9 +162,10 @@ class Iterm2RemoteServer(iterm2_remote_pb2_grpc.Iterm2RemoteServicer):
     #     return iterm2_remote_pb2.DoRequestReply(ok=True, error=None)
 
 
+# why has this become so slow???
 def serve():
     port = "50051"
-    server = grpc.server(ThreadPoolExecutor(max_workers=10))
+    server = grpc.server(ThreadPoolExecutor(max_workers=5))
     iterm2_remote_pb2_grpc.add_Iterm2RemoteServicer_to_server(Iterm2RemoteServer(), server)
 
     # idk why this is not being printed anymore

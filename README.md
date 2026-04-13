@@ -4,10 +4,17 @@
 
 An extension to remotely manipulate iterm2 sessions. 
 
+<br>
+
+<video controls>
+  <source src="assets/iterm2-remote-example-video.mp4" type="video/mp4">
+</video>
+(the delay is what I am trying to fix right now)
+
 ---
 ### How to use (currently)  
 
-To run server:
+To run server
 ```
 python -m server.server
 ```  
